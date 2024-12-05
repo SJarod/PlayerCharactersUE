@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "ThirdPersonCharacterLegacy.generated.h"
+#include "FirstPersonCharacterLegacy.generated.h"
 
 class ACharacterController;
 
 UCLASS()
-class CHARACTERFRAMEWORK_API AThirdPersonCharacterLegacy : public ACharacter
+class CHARACTERFRAMEWORK_API AFirstPersonCharacterLegacy : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -55,7 +55,7 @@ protected:
 
 public:
 	// Sets default values for this character's properties
-	AThirdPersonCharacterLegacy();
+	AFirstPersonCharacterLegacy();
 
 
 	// Called every frame

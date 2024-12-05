@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "ThirdPersonCharacterLegacy.generated.h"
+#include "ThirdPersonCharacter.generated.h"
 
 class ACharacterController;
+struct FInputActionValue;
 
 UCLASS()
-class CHARACTERFRAMEWORK_API AThirdPersonCharacterLegacy : public ACharacter
+class CHARACTERFRAMEWORK_API AThirdPersonCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -31,23 +32,11 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;
 
-	/** Called for forwards/backward input */
-	void MoveForward(float Value);
+	/** Called for movement input */
+	void Move(const FInputActionValue& Value);
 
-	/** Called for side to side input */
-	void MoveRight(float Value);
-
-	/** 
-	 * Called via input to turn at a given rate. 
-	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
-	 */
-	void TurnAtRate(float Rate);
-
-	/**
-	 * Called via input to turn look up/down at a given rate. 
-	 * @param Rate	This is a normalized rate, i.e. 1.0 means 100% of desired turn rate
-	 */
-	void LookUpAtRate(float Rate);
+	/** Called for looking input */
+	void Look(const FInputActionValue& Value);
 
 	void Jump() override;
 	
@@ -55,14 +44,21 @@ protected:
 
 public:
 	// Sets default values for this character's properties
-	AThirdPersonCharacterLegacy();
-
+	AThirdPersonCharacter();
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+#if ENGINE_MAJOR_VERSION == 4
+
+#elif ENGINE_MAJOR_VERSION == 5
+
+	virtual void NotifyControllerChanged() override;
+	
+#endif
 
 public:
 	/** Returns CameraBoom subobject **/

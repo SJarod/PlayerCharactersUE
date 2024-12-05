@@ -2,6 +2,7 @@
 
 
 #include "CharacterController.h"
+#include "InputMappingContext.h"
 
 void ACharacterController::SpawnCharacter()
 {
